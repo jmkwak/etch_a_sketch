@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ETCH A SKETCH PROJECT</title>
+  <link href="style/reset.css" rel="stylesheet" type="text/css">
+  <link href="style/style.css" rel="stylesheet" type="text/css" media="all">
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+</head>
+<body>
+  <h1 id="title">ISSA SKETCH TIME YAH!</h1>
+  <div id="reset">
+    <button>RESET</button>
+  </div>
+  <div id="instructions">
+    <p>Simply hover your mouse over the grids to sketch. Press the RESET button at
+      the top to customize your own grid!
+    </p>
+  </div>
+  <div class="grid-container"></div>
+
+  <script>
+
+      firstTime = true;
+
+      //creates the grid for drawing
+      function createPad(gridWidth, gridHeight) {
+
+        if(firstTime) {
+          gridWidth = 16;
+          gridHeight = 16;
+        }
+
+        const container = document.querySelector('.grid-container');
+        let table = document.createElement('table');
+
+        for(var y = 0; y < gridHeight; y++) {
+            let row = document.createElement('tr')
+            for(var x = 0; x < gridWidth; x++) {
+                let col = document.createElement('td');
+                row.appendChild(col);
+            }
+            table.appendChild(row);
+        }
+        container.appendChild(table);
+      }
+
+      createPad();
+
+      //actual drawing event listener
+      let squares = document.querySelectorAll('td');
+      squares.forEach((td) => {
+        td.addEventListener('mouseover', (e) => {
+          e.target.style.backgroundColor = "black";
+        });
+      });
+
+  </script>
+</body>
+</html>
