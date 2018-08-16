@@ -43,16 +43,33 @@
             table.appendChild(row);
         }
         container.appendChild(table);
+        firstTime = false;
+      }
+
+      //actual drawing event listener
+      function drawOnPad() {
+        let squares = document.querySelectorAll('td');
+        squares.forEach((td) => {
+          td.addEventListener('mouseover', (e) => {
+            e.target.style.backgroundColor = "black";
+          });
+        });
       }
 
       createPad();
+      drawOnPad();
 
-      //actual drawing event listener
-      let squares = document.querySelectorAll('td');
-      squares.forEach((td) => {
-        td.addEventListener('mouseover', (e) => {
-          e.target.style.backgroundColor = "black";
-        });
+
+      document.querySelector('button').addEventListener('click', function() {
+        let newDimension = prompt('Choose a new dimension! ex.type 20 for a grid of 20x20.');
+        //document.querySelectorAll("table").deleteRow();
+        let table = document.querySelector("table");
+        //or use :  var table = document.all.tableid;
+        for(let i = table.rows.length - 1; i >= 0; i--) {
+            table.deleteRow(i);
+        }
+        createPad(newDimension, newDimension);
+        drawOnPad();
       });
 
   </script>
